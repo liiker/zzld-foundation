@@ -1,0 +1,17 @@
+{
+    "name": "zzld/foundation",
+    "description": "中正联达基础框架",
+    "authors": [
+        {
+            "name": "adam",
+            "email": "liiker@qq.com"
+        }
+    ],
+    "require": {
+		"twig/twig":"~1.0",
+		"laravel/passport":"~1.0"
+	},
+	"autoload": {
+        "psr-4": {"Zzld\\Foundation\\": "src/"}
+    }
+}
