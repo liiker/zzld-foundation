@@ -2,10 +2,15 @@
 
 > 注意:本框架以Laravel 5.3 为基础进行开发。此版本为开发预览版，接口及功能已经趋于稳定，但是部分功能还未实现
 
+## 介绍
 中正联达基础框架，主要包括以下功能:
-1. 基于模型配置的后端管理脚手架(常规的CRUD 功能)
-2. 基于角色的权限管理(用户 角色 部门 职位)
+### 基于模型配置的后端管理脚手架(常规的CRUD 功能)
+通过对`Laravel` 自带的模型类进行扩充，通过脚手架的解析功能将模型直接解析为可以展示的列表和表单等。
 
+当前的模型配置是通过基于数组的描述文件进行配置，后续考虑通过 `GridMaker` 和 `FormMaker` 两个生成器来生成配置信息，这样可以讲配置语意话，方便使用IDE的童鞋（Emacs 党飘过，后续也会为Emacs用户提供相关的扩展)。
+### 基于角色的权限管理(用户 角色 部门 职位)
+
+> 本文档已经过时，等待更新说明文档
 
 ## 安装
 
@@ -15,48 +20,13 @@
 composer require "liiker/zzld-foundation:*"
 ```
 
-> 注意:由于本项目暂时为放到[github](http://github.com) 而且没有同步到 [packagist](https://packagist.org) 上面，所以暂时无法通过此方法进行安装
-
-#### 本地安装
-
-1. 将扩展包项目通过git同步到本地的任意路径下，比如: /home/users/path/packages
-```shell
-git clone git@git.oschina.net:nxzzld/packages.git
-```
-
-2. 修改composer.json文件添加本地 repository 
-```php
-repositories:[
-  {
-	  type: path,
-	  url: /home/users/path/packages/* //<=上一步的路径
-  },
-  ...
-],
-```
-
-3. 修改composer.json 文件，在 require 中添加：
-```php
-require: {
-...
-"zzld/foundation":"*@dev" //<=注意:版本必须为:*@dev
-...
-}
-```
-
-4. 在项目目录下执行： 
-```shell
-composer require
-```
-进入项目的vendor目录下目录下如果看到`zzld/foundation`这个目录则安装成功
-
 ## 配置
 
 1. 修改 config/app.php 文件，在 `providers` 中添加 `Zzld\Foundation\Providers\FoundationServiceProvider::class`
 2. 运行命令 `./artisan vendor:publish` 将扩展的配置和资源文件同步到项目目录下
 
 
-## 模型配置方法
+### 模型配置方法
 为了将重复劳动降低到最低，通过`Adminable`实现了通用模型的CRUD功能。可以方便的进行基本后台管理。
 
 #### 模型参考实例
@@ -278,7 +248,7 @@ class User extends Authenticatable
          'list' => function(){
              return DishesType::all();
          }
-         ┊*/
+         */
      ],
  ],
 ```
@@ -290,3 +260,7 @@ class User extends Authenticatable
 > 4. model.bind_field 编辑和添加页面中外键下拉框对应显示的属性
 > 5. model.key 编辑和添加页面中外键下拉框对应的值
 > 6. model.list 如果编辑和添加中显示的是某个外表中一部分数据可以通过list来指定，list是一个方法，返回的是laravel模型信息
+
+
+## Remark
+本项目所有代码均在Emacs下编写 :)
