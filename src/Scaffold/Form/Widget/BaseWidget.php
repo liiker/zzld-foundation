@@ -1,5 +1,5 @@
 <?php
-namespace Zzld\Foundation\Support\Widget;
+namespace Zzld\Foundation\Scaffold\Form\Widget;
 
 class BaseWidget
 {
@@ -12,8 +12,12 @@ class BaseWidget
     public function __construct($tag, $id="", $name="")
     {
         $this->tag  = $tag;
-        $this->id   = $id;
-        $this->name = $name;
+        if($id){
+            $this->id   = $id;
+        }
+        if($name){
+            $this->name = $name;
+        }
     }
 
     public function render(){
@@ -22,17 +26,23 @@ class BaseWidget
             $html .= " {$key}=\"{$value}\"";
         }
 
-        foreach($this->subWidgets as $widget){
-            $html .= $widget->render();
-        }
-
         if($this->hasContent){
-            $html .= ">{$this->body}</{$this->tag}>";
+            $html .= ">";
+            foreach($this->subWidgets as $widget){
+                $html .= $widget->render();
+            }
+            $html .= "{$this->body}</{$this->tag}>";
         }else{
             $html .= "/>";
         }
 
         return $html;
+    }
+
+    public function body($body)
+    {
+        $this->body = $body;
+        return $this;
     }
 
     public function __set($name, $value)
@@ -55,6 +65,7 @@ class BaseWidget
      */
     public function addSubWidgets($widget){
         $this->subWidgets[] = $widget;
+        return $this;
     }
 
     public function __toString(){
