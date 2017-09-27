@@ -7,6 +7,8 @@ use Zzld\Foundation\Scaffold\Form\Widget\InputWidget;
 use Zzld\Foundation\Scaffold\Form\Widget\TextareaWidget;
 use Zzld\Foundation\Scaffold\Form\Widget\SelectWidget;
 
+use Zzld\Foundation\Scaffold\Form\Field\BaseField;
+
 class WidgetTest extends TestCase
 {
     public function testNoBodyWidget()
@@ -68,7 +70,15 @@ class WidgetTest extends TestCase
         );
 
         $html = '<select id="id" name="name"><option value="1">aaa</option><option value="2">bbb</option></select>';
-        
         $this->assertEquals($html, $select->render());
+    }
+
+    public function testBaseField()
+    {
+        $baseField = new BaseField("username", "用户名", "不能为空");
+
+        $html = '<div class="form-group"><label class="control-label" for="username">用户名</label><input type="text" id="id_username" name="username"/><span>不能为空</span></div>';
+
+        $this->assertEquals($html, $baseField->render());
     }
 }
